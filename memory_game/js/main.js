@@ -5,7 +5,7 @@ const cardOne = cards[0];
 cardsInPlay.push(cardOne);
 console.log("User flipped" + " " + cardOne); 
 
-const cardTwo = cards[1];
+const cardTwo = cards[3];
 cardsInPlay.push(cardTwo);
 console.log("User flipped" + " " + cardTwo); 
 
@@ -15,5 +15,4 @@ if (cardsInPlay.length === 2) {
 	} else {
 		alert("Sorry, try again.")
 	}
-
 }
