@@ -24,44 +24,49 @@ cardImage: 'images/king-of-diamonds.png',
 
 ];
 
-const cardsInPlay = [];
+// Array with the cards currently being played 
+var cardsInPlay = [];
+// Store the times the user wins
+var score = 0;
 
-function checkForMatch (){
-	 
-	if (cardsInPlay.length >= 2){
+var checkForMatch = function () {
 		if ( cardsInPlay[0] === cardsInPlay[1]) {
 			alert("You found a match!");
+			// updating score
+			score += 1;
+			// show the score in console.log
+			console.log(score);
 		} else {
-			alert("Sorry, try again.")
+			alert("Sorry, try again.");
+			console.log(score);
 		}
-	}
 };
 
 
-function flipCard (){
+var flipCard = function () {
+	// Get the data-id of the card that was just clicked
 	var cardId = this.getAttribute('data-id');
-	// getAttribute method to get the data-id attribute of 
-	// the card that was just clicked and store it in a 
-	// variable cardId.
 	console.log("User flipped " + cards[cardId].rank);
 	cardsInPlay.push(cards[cardId].rank);
 	console.log(cards[cardId].cardImage);
 	console.log(cards[cardId].suit);
+	// Display the card's image that was just clicked 
 	this.setAttribute('src', cards[cardId].cardImage);
-	// use the setAttribute method to update the src attribute 
-	// to the image of the card that was just clicked (the image
-	// source is in the cardImage property in that card's object 
-	// in the cards array).
+
+	// If the length of cardsInPlay equals 2 then call the checkForMatch function
+	if (cardsInPlay.length === 2){
 	checkForMatch();
+	// After calling the function, empty cards in cardsInPlay array
+	cardsInPlay = [];
+	}
 };
 
-function createBoard (){
+var createBoard = function () {
 	for (var i = 0; i < cards.length; i++ ) {
 		var cardElement = document.createElement('img');
 		cardElement.setAttribute('src', 'images/back.png');
+		// data- attributes are meant to store data about an element that is not tied to a style 
 		cardElement.setAttribute('data-id', i);
-		// data- attributes are meant to store data about an 
-		// element that is not tied to a style. 
 		cardElement.addEventListener('click', flipCard);
 		document.getElementById('game-board').appendChild(cardElement);
 	}
